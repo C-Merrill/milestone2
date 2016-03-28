@@ -13,6 +13,7 @@ router.get('/login', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   var sha1sum = crypto.createHash('sha1');
+  var salt = 'lP7E17apjwkm2NIk1NFv';
 
   req.db.driver.execQuery(
     'SELECT * FROM users WHERE username=?;',
@@ -23,7 +24,7 @@ router.post('/login', function(req, res, next) {
         console.log(err);
       }
 
-      sha1sum.update(req.body.password);
+      sha1sum.update(req.body.password+salt);
       var hashed_input = sha1sum.digest('hex');
 
       if(data[0]!=null && hashed_input === data[0].password) //DONT Do this in other projects!!!
