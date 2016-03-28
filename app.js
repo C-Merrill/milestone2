@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var dbstring = "postgres://cs2610:foo@localhost/entries";
+var dbstring = "postgres://cs2610:lol@localhost/entries";
 var string = process.env.DATABASE_URL || dbstring;
 app.use(orm.express(string, {
     define: function (db, models, next) {
@@ -66,4 +66,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-app.listen(8080);
+app.listen(8000);
