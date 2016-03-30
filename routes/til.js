@@ -7,13 +7,14 @@ var entries=[];
 
 /* READ all: GET entries listing. */
 router.get('/', function(req, res, next){
+    var name = req.cookies.username;
     req.db.driver.execQuery(
 	     "SELECT * FROM entries;",
 	      function(err, data){
 	         if(err){
 		           console.log(err);
 	         }
-	         res.render('til/index', { title: 'Entries', entries: data });
+	         res.render('til/index', { title: 'Entries', entries: data, name, name });
 	      }
     );
 });
